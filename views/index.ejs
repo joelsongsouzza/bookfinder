@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Bibliotecário - Buscador de Livros</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <style> @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); </style> 
+</head>
+<body class="bg-light my-5" style="background-image: url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v549-tang-14a-feather_1.jpg?auto=format&bg=transparent&con=3&cs=srgb&dpr=1&fm=jpg&ixlib=php-3.1.0&mark=rawpixel-watermark.png&markalpha=90&markpad=13&markscale=10&markx=25&q=75&usm=15&vib=3&w=1400&s=b781d37e8abab1243e526094cc56d472);">
+    <img class="d-block mx-auto" src="../public/images/logo2.png">
+    <h2 class="text-center mb-4">Buscador de Livros</h2>
+    <form action="/pesquisar" method="GET">
+        <input style="width: 370px;" class="mx-auto form-control mb-2" placeholder="Autor, Nome do Livro, Assunto..." name="livro">
+        <button style="width: 370px;" class="btn btn-primary d-block mx-auto container-fluid mb-4">Procurar</button>
+    </form>
+    
+    <% if (data == null) { %>
+        <% console.log('Vazio') %>
+    <% } else { %>
+    <% data.forEach((value) => { %>
+    <div class="container bg-light border shadow mb-3">
+            <div class="container-fluid mb-3 mt-2 p-3 row">
+                <div class="col-sm-2">
+                    <% if (value.volumeInfo.imageLinks != null) { %>
+                        <img class="d-block mx-auto" src="<%= value.volumeInfo.imageLinks.smallThumbnail %>">
+                    <% } %>
+                    <a target="_blank" style="text-decoration: none;" href="<%= value.volumeInfo.previewLink %>"><button style="width: 135px;" class="d-block mx-auto btn btn-primary mt-2 mb-1">Ler Prévia</button></a>
+                    <a target="_blank" style="text-decoration: none;" href="<%= value.volumeInfo.infoLink %>"><button style="width: 135px;" class="d-block mx-auto btn btn-success mt-2 mb-1">Comprar</button></a>
+                </div>
+            
+                <div class="col-sm-4" style="font-family: 'Roboto', sans-serif;">
+                    <h5 class="mb-3"><b><%= value.volumeInfo.title %></b></h5>
+                    <p><b>Google ID:</b> <%= value.id %></p>
+
+                    <% if (value.volumeInfo.authors != null) { %>
+                        <p><b>Autores</b>:  <%= value.volumeInfo.authors %> </p>
+                    <% } %>
+
+                    <% if (value.volumeInfo.publisher != null) { %>
+                    <p><b>Publicadora</b>:  <%= value.volumeInfo.publisher %> </p>
+                    <% } %>
+
+                    <% if (value.volumeInfo.publishedDate != null) { %>
+                        <p><b>Data de Publicação:</b> <%= value.volumeInfo.publishedDate %> </p>
+                    <% } %>
+
+                    <% if (value.saleInfo.listPrice != null) { %>
+                        <p><b>Preço:</b> R$<%= value.saleInfo.listPrice.amount %></p>
+                    <% } %>
+
+                    <% if (value.volumeInfo.categories != null) { %>
+                        <p><b>Categorias</b>:</p>
+                        <% value.volumeInfo.categories.forEach((elemento) => { %>
+                            <p> • <%= elemento %></p>
+                        <% }) %>
+                    <% } %>
+
+                    <% if (value.volumeInfo.pageCount != null) { %>
+                        <p><b>Páginas</b>:  <%= value.volumeInfo.pageCount %> </p>
+                    <% } %>
+                </div>
+
+                <div class="col-sm-6 text-justify" style="font-family: 'Roboto', sans-serif;">
+                    <% if (value.volumeInfo.description != null) { %>
+                        <p><b>Descrição</b>:  <%= value.volumeInfo.description %> </p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <% })} %>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
