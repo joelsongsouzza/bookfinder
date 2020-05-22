@@ -27,6 +27,7 @@
 ...
 
 A variável 'livro' recebe o query da busca, para ser somado ao query da API do Google.
+(É possível fazer de uma forma mais curta, utilizando 'template strings')
 Uma função assíncrona espera a resposta do servidor, devolvendo e gerando a página da busca.
 Porém a requisição retorna muito mais do que precisamos, então basta filtrar para mostrar apenas o que queremos.
 
