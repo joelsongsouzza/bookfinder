@@ -5,6 +5,9 @@
 ### É um site que utiliza a API do Google Books para listar os livros que batem com a pesquisa digitada.
 #### Possibilitando também a ler uma prévia do livro, ou levar direto para o site da aquisição do e-book do livro (quando disponível).
 
+Você pode testá-lo aqui:
+[O Bibliotecario](https://o-bibliotecario.rj.r.appspot.com/)
+
 ### Como ele funciona?
 #### É mais simples do que parece.
 
